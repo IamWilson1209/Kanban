@@ -1,0 +1,13 @@
+version: '3.8' # 使用的 Docker Compose 版本
+
+services: # 服務配置
+  mysql: # 服務名稱
+    image: mysql:8.4.3 # 使用的 MySQL 映像
+    container_name: weishiuan-mysql # 容器名稱
+    environment: # 環境變數
+      MYSQL_ROOT_PASSWORD: qaz777777 # 密碼
+    volumes:
+      - ~/weishiuan_mysql_data:/var/lib/mysql # 持久化數據
+    ports: # 映射端口
+      - '3306:3306' # 映射主機的 3306 端口到容器的 3306 端口
+    restart: unless-stopped # 重新啟動策略
