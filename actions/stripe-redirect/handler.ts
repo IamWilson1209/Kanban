@@ -25,6 +25,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   let url = ""
 
+  console.log('jjj')
+
   try {
     const orgSubscription = await db.orgSubscription.findUnique({
       where: {
