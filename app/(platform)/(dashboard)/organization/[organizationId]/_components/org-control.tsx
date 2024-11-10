@@ -14,7 +14,7 @@ export const OrgControl = () => {
 
     // 當 params.organizationId(url)改變時，重新執行 setActive，切換當前組織的狀態
     setActive({
-      organization: params.orgenizationId as string,
+      organization: params.organizationId as string,
     });
   }, [setActive, params.organizationId]);
 

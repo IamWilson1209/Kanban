@@ -29,6 +29,5 @@ export const checkSubscription = async () => {
   }
 
   const isValid = orgSubscription.priceId && orgSubscription.currentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now()
-
   return !!isValid; // 確保返回布林值
 }

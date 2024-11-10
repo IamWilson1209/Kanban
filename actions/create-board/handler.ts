@@ -11,6 +11,7 @@ import { createBoardSchema } from './schema';
 import { Action, EntityType } from '@prisma/client';
 import { createAuditLog } from '@/lib/create-audit-log';
 import { hasAvailableCount, incrementAvailableCount } from '@/lib/org-limit';
+import { checkSubscription } from '@/lib/subscription';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
 
@@ -21,8 +22,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const availableToCreate = await hasAvailableCount();
-  if (!availableToCreate) {
+  const availableBoardToCreate = await hasAvailableCount();
+  const isPro = await checkSubscription();
+
+  if (!availableBoardToCreate && !isPro) {
     return {
       error: 'No available free boards to create, Please update to create more',
     };
@@ -61,7 +64,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    await incrementAvailableCount();
+    if (!isPro) {
+      await incrementAvailableCount();
+    }
 
     await createAuditLog({
       entityTitle: board.title,
