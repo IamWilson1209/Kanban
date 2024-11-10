@@ -1,7 +1,8 @@
 {
-  "extends": ["eslint:recommended", "next"],
+  "extends": ["next/core-web-vitals", "next"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "@typescript-eslint/no-unused-vars": "error"
   }
 }
