@@ -4,9 +4,26 @@ import { useProModal } from '@/hooks/use-pro-model';
 import { Dialog, DialogContent } from '../ui/dialog';
 import Image from 'next/image';
 import { Button } from '../ui/button';
+import { stripeRedirect } from '@/actions/stripe-redirect/handler';
+import { useAction } from '@/hooks/use-action';
+import { toast } from 'sonner';
 
 export const ProModal = () => {
   const proModal = useProModal();
+
+  const { execute, isLoading } = useAction(stripeRedirect, {
+    onSuccess: (data) => {
+      // toast.success('');
+      window.location.href = data;
+    },
+    onError: (error) => {
+      toast.error('Failed to subscribe. Please try again.');
+    },
+  });
+
+  const handleOnClick = () => {
+    execute({});
+  };
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -32,7 +49,12 @@ export const ProModal = () => {
               <li>And more!!</li>
             </ul>
           </div>
-          <Button className="w-full" variant="kanban">
+          <Button
+            disabled={isLoading}
+            onClick={handleOnClick}
+            className="w-full"
+            variant="kanban"
+          >
             Upgrade
           </Button>
         </div>

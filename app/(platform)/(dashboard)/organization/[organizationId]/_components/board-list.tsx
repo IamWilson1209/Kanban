@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { MAX_FREE_BOARDS } from '@/constants/board';
 import { getAvailableCount } from '@/lib/org-limit';
+import { checkSubscription } from '@/lib/subscription';
 
 export const BoardList = async () => {
   const { orgId } = await auth();
@@ -26,6 +27,7 @@ export const BoardList = async () => {
   });
 
   const availableCount = await getAvailableCount();
+  const isPro = await checkSubscription();
 
   return (
     <div className="space-y-4">
@@ -54,9 +56,11 @@ export const BoardList = async () => {
             className="bg-muted rounded-sm relative h-full w-full flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition aspect-vedio"
           >
             <p className="text-sm">Create New Boars</p>
-            <span className="text-xs">{`${
-              MAX_FREE_BOARDS - availableCount
-            } remaining`}</span>
+            <span className="text-xs">
+              {isPro
+                ? 'Unlimited'
+                : `${MAX_FREE_BOARDS - availableCount} remaining`}
+            </span>
             <Hint
               side={'bottom'}
               sideOffset={10}
