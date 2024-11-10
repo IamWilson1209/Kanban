@@ -1,4 +1,5 @@
 import { Sidebar } from '../_components/sidebar';
+import React from 'react';
 
 const OrganizationLayout = ({ children }: { children: React.ReactNode }) => {
   return (
