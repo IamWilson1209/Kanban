@@ -4,6 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import React from 'react';
 
 interface HintProps {
   children: React.ReactNode;

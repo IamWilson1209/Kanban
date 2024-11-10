@@ -21,7 +21,6 @@ interface SidebarProps {
 export const Sidebar = ({ storage = 'app-sidebar-state' }: SidebarProps) => {
   // storage props用來分離電腦版跟手機版 state
   // 追蹤哪個 organization 處於 Expand 狀態，重新整理也可以自動展開
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storage, // 鍵
     {} // 值，這裡的 {} 看起來會像{"organization-id,..."}

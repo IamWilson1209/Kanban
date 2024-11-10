@@ -2,6 +2,7 @@ import db from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 import { notFound, redirect } from 'next/navigation';
 import { BoardNavBar } from './_components/board-navbar';
+import React from 'react';
 
 // 顯示頁面 title 用
 export async function generateMetadata({
