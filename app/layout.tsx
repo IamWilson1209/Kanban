@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   icons: [
     {
-      url: '/next.svg',
-      href: '/next.svg',
+      url: '/logo.svg',
+      href: '/logo.svg',
     },
   ],
 };

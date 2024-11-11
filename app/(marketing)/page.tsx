@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import localFont from 'next/font/local';
 import { Poppins } from 'next/font/google';
-import { Medal } from 'lucide-react';
+import { Award, Star, ChartSpline } from 'lucide-react';
+import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { appName } from '@/public/appName';
+import { Separator } from '@/components/ui/separator';
 
 // 用來localFont設定頁面font格式，這裡練習用cal.com font
 const headingFont = localFont({
@@ -17,6 +20,11 @@ const textFont = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
+const imageSize = {
+  height: 100,
+  width: 100,
+};
+
 const MarketingPage = () => {
   return (
     <div className="flex items-center justify-center flex-col">
@@ -26,15 +34,34 @@ const MarketingPage = () => {
           headingFont.className
         )}
       >
-        <div className="mb-4 flex item-center border shadow-sm p-4 bg-amber-100 text-amber-700 rounded-full uppercase">
-          <Medal className="h-6 w-6 mr-2" />
-          No 1 task management
+        <div className="flex items-center justify-center gap-x-5">
+          <div
+            className="flex items-center border-spacing-11 shadow-sm px-10 py-4 mb-10 bg-gradient-to-br
+         from-gray-300 to-blue-900 text-white rounded-full uppercase hover:scale-105 transition-transform duration-300"
+          >
+            <Star className="h-6 w-6 mr-2" />
+            No 1 app rated by aqqle
+          </div>
+          <div
+            className="flex items-center border-spacing-11 shadow-sm px-10 py-4 mb-10 bg-gradient-to-br
+         from-gray-300 to-blue-900 text-white rounded-full uppercase hover:scale-105 transition-transform duration-300"
+          >
+            <Award className="h-6 w-6 mr-2" />
+            No 1 download app in 2030
+          </div>
+          <div
+            className="flex items-center border-spacing-11 shadow-sm px-10 py-4 mb-10 bg-gradient-to-br
+         from-gray-300 to-blue-900 text-white rounded-full uppercase hover:scale-105 transition-transform duration-300"
+          >
+            <ChartSpline className="h-6 w-6 mr-2" />
+            No 1 usage app in 2030
+          </div>
         </div>
-        <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6">
-          Taskify helps team move
+        <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6 mt-10">
+          {appName} helps team working with agility
         </h1>
-        <div className="text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 rounded-md pb-2 w-fit">
-          Work forward
+        <div className="text-3xl md:text-6xl text-blue-800 px-4 p-2 rounded-md pb-2 w-fit">
+          Let{"'"}s get started!!
         </div>
       </div>
       <div
@@ -43,12 +70,68 @@ const MarketingPage = () => {
           textFont.className
         )}
       >
-        Write Something to pronunce your ideas, using this app yo build a scrum
-        task environment for your team
+        Using this app to build a extraordinary scrum working environment for
+        your team, easily track each project{"'"}s working status, responsiblity
+        and deadline.
       </div>
-      <Button className="mt-6" size="lg" asChild>
-        <Link href="sign-up">Get Taskify for free</Link>
-      </Button>
+      <div className="flex items-center">
+        <Image
+          src="/logo.svg"
+          alt="Logo"
+          height={imageSize.height}
+          width={imageSize.width}
+          className="hover:scale-110 transition-transform duration-300"
+        />
+        <Button
+          className="mt-20 mb-20 font-semibold text-xl px-10 py-8"
+          size="lg"
+          asChild
+          variant="dark"
+        >
+          <Link href="sign-up">Start {appName} for free</Link>
+        </Button>
+      </div>
+      <Separator className="mt-10" />
+      <h1 className="mt-10 text-2xl font-semibold">
+        {appName} is made by following technologies...
+      </h1>
+      <div className="flex items-center mt-10 gap-x-10">
+        <Image
+          src="/nextjs-icon.svg"
+          alt="Logo"
+          height={imageSize.height}
+          width={imageSize.width}
+          className="hover:scale-110 transition-transform duration-300"
+        />
+        <Image
+          src="/mysql-icon.svg"
+          alt="Logo"
+          height={imageSize.height}
+          width={imageSize.width}
+          className="hover:scale-110 transition-transform duration-300"
+        />
+        <Image
+          src="/prisma-icon.svg"
+          alt="Logo"
+          height={imageSize.height}
+          width={imageSize.width}
+          className="hover:scale-110 transition-transform duration-300"
+        />
+        <Image
+          src="/docker-icon.svg"
+          alt="Logo"
+          height={imageSize.height}
+          width={imageSize.width}
+          className="hover:scale-110 transition-transform duration-300"
+        />
+        <Image
+          src="/clerk-icon.jpg"
+          alt="Logo"
+          height={imageSize.height}
+          width={imageSize.width}
+          className="hover:scale-110 transition-transform duration-300"
+        />
+      </div>
     </div>
   );
 };

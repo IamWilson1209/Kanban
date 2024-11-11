@@ -18,9 +18,12 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        kanban: 'bg-sky-700 text-primary-foreground hover:bg-sky-700/90',
+        kanban:
+          'bg-sky-700 text-primary-foreground hover:bg-sky-700/90 hover:text-black',
         transparent: 'bg-transparent text-white hover:bg-white/20',
-        gray: 'bg-neutral-200 text-secondary-foreground hover:bg-neutral-100',
+        gray: 'bg-neutral-500 text-secondary hover:bg-neutral-300 hover:text-black',
+        blue: 'bg-slate-600 text-secondary hover:bg-slate-200/100 hover:text-black',
+        dark: 'bg-black text-secondary hover:bg-slate-300/100 hover:text-black',
       },
       size: {
         default: 'h-10 px-4 py-2',

@@ -14,10 +14,14 @@ import { SideBarItem, Organization } from './sidebar-items';
 // Accordion在切換organization，重新渲染後，Sidebar可能不會跟著Expand
 // 所以用SideProps傳遞organization資訊紀錄目前選取的org
 interface SidebarProps {
+  isPro?: boolean;
   storage?: string;
 }
 
-export const Sidebar = ({ storage = 'app-sidebar-state' }: SidebarProps) => {
+export const Sidebar = ({
+  isPro,
+  storage = 'app-sidebar-state',
+}: SidebarProps) => {
   // storage props用來分離電腦版跟手機版 state
   // 追蹤哪個 organization 處於 Expand 狀態，重新整理也可以自動展開
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
@@ -73,8 +77,8 @@ export const Sidebar = ({ storage = 'app-sidebar-state' }: SidebarProps) => {
 
   return (
     <>
-      <div className="font-medium text-xs flex items-center mb-1">
-        <h3 className="pl-4">Workspace</h3>
+      <div className="font-semibold text-xl flex items-center mb-1 text-white">
+        <h1 className="pl-1">Workspace</h1>
         <Button
           asChild
           type="button"
@@ -82,8 +86,8 @@ export const Sidebar = ({ storage = 'app-sidebar-state' }: SidebarProps) => {
           variant="ghost"
           className="ml-auto" // 將該元素推到 flexbox 的右側
         >
-          <Link href="select-org">
-            <Plus className="h-4 w-3" />
+          <Link href="select-org" className="h-6 w-6 pr-2">
+            <Plus className="h-4 w-4" />
           </Link>
         </Button>
       </div>
@@ -100,6 +104,7 @@ export const Sidebar = ({ storage = 'app-sidebar-state' }: SidebarProps) => {
             isExpanded={expanded[organization.id]}
             organization={organization as Organization}
             onExpand={handleOnExpand}
+            isPro={isPro}
           />
         ))}
       </Accordion>

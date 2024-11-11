@@ -24,10 +24,8 @@ export const SubscriptionButton = ({ isPro }: SubscriptionButtonProps) => {
 
   const handleOnClick = () => {
     if (isPro) {
-      console.log('execute--------------');
       execute({});
     } else {
-      console.log('Failed to subscribe');
       proModal.onOpen();
     }
   };

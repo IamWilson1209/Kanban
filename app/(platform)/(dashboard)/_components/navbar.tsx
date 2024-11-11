@@ -4,10 +4,12 @@ import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 import { Plus } from 'lucide-react';
 import { MobileSideBar } from './mobile-side-bar';
 import { FormPopover } from '@/components/form/form-popover';
+import { checkSubscription } from '@/lib/subscription';
 
-export const Navbar = () => {
+export const Navbar = async () => {
+  const isPro = await checkSubscription();
   return (
-    <nav className="fixed z-50 top-0 px-4 w-full h-14 border-b shadow-sm bg-white flex items-center">
+    <nav className="fixed z-50 top-0 px-4 w-full h-14 border-b shadow-sm bg-zinc-900 flex items-center">
       <MobileSideBar />
       <div className="flex items-center gap-x-4">
         <div className="hidden md:flex">
@@ -17,6 +19,7 @@ export const Navbar = () => {
           <Button
             size="sm"
             className="rounded-sm hidden md:block h-auto py-1.5 px-2"
+            variant="dark"
           >
             Create
           </Button>

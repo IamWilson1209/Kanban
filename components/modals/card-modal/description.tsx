@@ -89,6 +89,7 @@ export const Description = ({ data }: DescriptionProps) => {
               defaultValue={data.description || undefined}
               errors={fieldErrors}
               ref={textAreaRef}
+              onKeyDown={undefined}
             />
             <div className="flex items-center gap-x-2">
               <FormSubmitButton>Save</FormSubmitButton>

@@ -21,6 +21,7 @@ export type Organization = {
 };
 
 interface SideBarItemsProps {
+  isPro: boolean;
   isExpanded: boolean;
   isActive: boolean;
   organization: Organization;
@@ -32,12 +33,13 @@ export const SideBarItem = ({
   isActive,
   organization,
   onExpand,
+  isPro,
 }: SideBarItemsProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
   // 自訂義多個路由的陣列
-  const routes = [
+  const sidebarItemsRoutes = [
     {
       label: 'Boards',
       icon: <Layout className="h-4 w-4 mr-2" />,
@@ -69,8 +71,9 @@ export const SideBarItem = ({
       <AccordionTrigger
         onClick={() => onExpand(organization.id)}
         className={cn(
-          'text-neutral-700 flex items-center gap-x-2 p-1.5 rounded-md hover:bg-neutral-500/10 transition text-start no-underline hover:no-underline',
-          isActive && !isExpanded && 'bg-sky-500/10 text-sky-700'
+          'text-neutral-400 font-bold flex items-center gap-x-2 p-1.5 rounded-md hover:bg-neutral-400/10 transition text-start no-underline hover:no-underline',
+          isActive && !isExpanded && 'bg-neutral-500/10 text-slate-200',
+          isActive && isPro && 'text-amber-400/80'
         )}
       >
         <div className="flex items-center gap-x-2">
@@ -82,19 +85,24 @@ export const SideBarItem = ({
               className="rounded-sm object-cover"
             />
           </div>
-          <span className="font-medium text-sm">{organization.name}</span>
+          <span className="font-semibold text-balance">
+            {isPro && isActive
+              ? organization.name + ' ' + '- premium'
+              : organization.name}
+          </span>
         </div>
       </AccordionTrigger>
       <AccordionContent className="pt-1 text-neutral-700">
-        {routes.map((route) => {
+        {sidebarItemsRoutes.map((route) => {
           return (
             <Button
               key={route.href}
               size="icon"
               onClick={() => handleOnClink(route.href)}
               className={cn(
-                'w-full font-normal justify-start pl-10 mb-1',
-                pathname === route.href && 'bg-sk-500/10 text-sky-700'
+                'w-full font-medium justify-start pl-10 mb-1 text-zinc-400',
+                pathname === route.href &&
+                  'bg-slate-600/10 text-zinc-300 font-semibold'
               )}
               variant="ghost"
             >
@@ -111,7 +119,7 @@ export const SideBarItem = ({
 // shadcn 加 skeleton 就是這麼簡單，笑死
 SideBarItem.Skeleton = function SkeletonNavItem() {
   return (
-    <div className="flex items=center justify-content gap-x-2">
+    <div className="flex items-center justify-content gap-x-2">
       <div className="w-10 h-10 relative shrink-0">
         <Skeleton className="h-full w-full absolute" />
       </div>
